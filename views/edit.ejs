@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <body style="font-family: Arial, sans-serif; text-align: center;">
+        <h1>Welcome, <%= user.name %></h1>
+        <hr/>
+        <p>You logged in through <b><%= user.type %></b></p>
+        <form action="/update" method="POST" enctype="multipart/form-data" style="margin-top: 20px;">
+            <label for="taskname">Task Name:</label><br>
+            <input type="text" id="taskname" name="taskname" value="<%= task.taskname %>"><br>
+            <label for="date">Date:</label><br>
+            <input type="date" id="date" name="date" value="<%= task.date %>"><br>
+            <!-- <label for="filetoupload">Upload File:</label><br>
+            <input type="file" id="filetoupload" name="filetoupload"><br> -->
+            <input type="hidden" name="_id" value="<%= task._id %>">
+            <input type="submit" value="Update"><br>
+            <!-- Creative element -->
+            <button style="padding: 10px 20px; background-color: #3498db; color: #fff; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">Update Task</button><br>
+            <a href="/content" style="text-decoration: none; padding: 5px 10px; background-color: #27ae60; color: white; border-radius: 5px; margin-top: 20px; display: inline-block;">Back</a>
+        </form>
+    </body>
+</html>

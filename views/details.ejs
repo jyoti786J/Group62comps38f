@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <body style="font-family: Arial, sans-serif; text-align: center;">
+        <h1>Hello, <%= user.name %></h1>
+        <hr/>
+        <p>You are logged in via <b><%= user.type %></b>. Your user ID is <%= user.id %></p>
+        <h2>Task Information</h2>
+        <hr>
+        <p>Task Name: <%= task.task %></p>
+        <p>Due Date: <%= task.date %></p>
+
+        <% if (task.photo) { %>
+            <img src="data:image/jpg;base64, <%= task.photo %>" style="max-width: 100%; height: auto;"><br>
+        <% } %>
+
+        <% if (task.userid) { %>
+            <p><small>Created by User ID: <%= task.userid %></small></p>
+        <% } %>
+        <br>
+        <a href="/edit?_id=<%= task._id %>" style="text-decoration: none; padding: 5px 10px; background-color: #3498db; color: #fff; border-radius: 5px;">Edit Task</a><br>
+        <a href="/delete?_id=<%= task._id %>" style="text-decoration: none; padding: 5px 10px; background-color: #e74c3c; color: #fff; border-radius: 5px; margin-top: 10px;">Delete Task</a><br>
+        <a href="/" style="text-decoration: none; padding: 5px 10px; background-color: #27ae60; color: #fff; border-radius: 5px; margin-top: 10px;">Back to Home</a>
+    </body>
+</html>
