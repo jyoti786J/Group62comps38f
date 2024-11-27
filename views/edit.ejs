@@ -1,21 +1,93 @@
+
+
 <!DOCTYPE html>
-<html>
-    <body style="font-family: Arial, sans-serif; text-align: center;">
-        <h1>Welcome, <%= user.name %></h1>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Task</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 800px; 
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="date"] {
+            width: 20%;
+            padding: 10px;
+            margin: 5px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"],
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 5px 10px;
+            background-color: #27ae60;
+            color: white;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        a:hover, button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Edit Task for <%= user.name %></h1>
         <hr/>
         <p>You logged in through <b><%= user.type %></b></p>
-        <form action="/update" method="POST" enctype="multipart/form-data" style="margin-top: 20px;">
-            <label for="taskname">Task Name:</label><br>
-            <input type="text" id="taskname" name="taskname" value="<%= task.taskname %>"><br>
-            <label for="date">Date:</label><br>
-            <input type="date" id="date" name="date" value="<%= task.date %>"><br>
-            <!-- <label for="filetoupload">Upload File:</label><br>
-            <input type="file" id="filetoupload" name="filetoupload"><br> -->
-            <input type="hidden" name="_id" value="<%= task._id %>">
+        <form action="/update" method="POST" enctype="multipart/form-data">
+            <label for="taskname">Task Name:</label>
+            <input type="text" id="taskname" name="taskname" value="<%= task.taskname %>" required>
+            
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" value="<%= task.date %>" required>
+            
+            <input type="hidden" name="_id" value="<%= task._id %>"><br>
             <input type="submit" value="Update"><br>
-            <!-- Creative element -->
-            <button style="padding: 10px 20px; background-color: #3498db; color: #fff; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">Update Task</button><br>
-            <a href="/content" style="text-decoration: none; padding: 5px 10px; background-color: #27ae60; color: white; border-radius: 5px; margin-top: 20px; display: inline-block;">Back</a>
+            <button type="button" onclick="document.location.href='/content'">Back</button>
         </form>
-    </body>
+    </div>
+</body>
+
 </html>
