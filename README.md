@@ -1,4 +1,4 @@
-Here’s a structured document similar to your example, tailored for your To-Do application. This document outlines the application features, authentication, CRUD operations, and RESTful API usage.
+Here’s a structured of To-Do application. This document outlines the application features, authentication, CRUD operations, and RESTful API usage.
 
 ---
 
@@ -28,7 +28,7 @@ After successful login, the user ID is stored in the session.
 
 ## Logout
 
-On the home page, each user can log out of their account by clicking the logout button.
+Users can log out of their accounts by clicking the logout button on the home page.
 
 ********************************************
 
@@ -39,28 +39,40 @@ On the home page, each user can log out of their account by clicking the logout 
 - A task document may contain the following attributes with an example:
   1. **Task Name** (Buy groceries)
   2. **Task ID** (Auto-generated)
-  3. **User ID** (user123)
+  3. **User ID** (122098074998635674)
   4. **Due Date** (2023-12-01)
 
+POST Request: Used for creating tasks with information sent in the request body.
 
-Task Name and User ID are mandatory, while other attributes are optional.
-
-The create operation is a POST request, and all information is sent in the request body.
 
 ********************************************
+## Task Attributes
+
+A task document in this application may contain the following attributes:
+
+1. **Task Name**: Represents the name or description of the task.
+2. **Due Date**: Indicates the deadline by which the task should be completed.
+
 
 ### Read
 
  **List All Tasks**: 
-   The `content.ejs` page will show all tasks associated with the logged-in user. By clicking on a task name, the details will be shown.
+  - Task Listing: The list.ejs page displays all tasks associated with the logged-in user. Tasks are presented in a clean and organized manner, showing the task name and due date.
+  - Task Details: Users can click on a task to view its details, providing more information about the task.
+  - Task Editing: Users have the option to edit tasks by clicking on the edit icon (🖋️) next to each task. This functionality allows users to make changes to task details.
+  - Task Deletion: Tasks can be deleted by clicking on the "Delete" link associated with each task. A confirmation prompt ensures that the user intends to delete the task.
+  - Task Creation: Users can easily add new tasks by clicking the "Add a New Task" link, which directs them to the task creation page.
+  - User Authentication: The application supports user authentication, displaying the user's name and type upon login.
 
 ********************************************
 
 ### Update
 
-- Users can update their task information through the details interface.
-- Among the attributes shown above, the Task ID cannot be changed. Since the Task ID is fixed, it is used as a search criterion for updating information.
+Users can update their tasks by following these steps:
 
+1. Navigate to the details interface for the task you want to update.
+2. Edit the task name and due date as needed.
+3. Save the changes by clicking the "Update" button.
 - A task document may contain the following attributes with an example:
   1. **Task Name** (Submit report)
   2. **Due Date** (2023-12-05)
@@ -71,7 +83,11 @@ In this example, we updated the task name and due date.
 
 ### Delete
 
-- Users can delete tasks they no longer need through the delete interface.
+Users can delete tasks by following these steps:
+
+1. Navigate to the task you want to delete.
+2. Click on the "Delete" link associated with the task.
+3. Confirm the deletion when prompted.
 
 ********************************************
 
@@ -85,7 +101,9 @@ The POST request is used to insert a new task record.
 **Path URL:** `/api/tasks`  
 **Test:** 
 ```bash
-curl -X POST -H "Content-Type: application/json" --data '{"task": "Finish assignment", "date": "2023-11-30"}' http://localhost:8099/api/tasks
+curl -X POST http://localhost:8099/api/record \
+  -H "Content-Type: application/json" \
+  -d '{"task": "Your Task Name", "date": "Task Date"}'
 ```
 
 ### GET
@@ -94,8 +112,9 @@ The GET request is used to retrieve task information.
 **Path URL:** `/api/tasks/:taskID`  
 **Test:**
 ```bash
-curl -X GET http://localhost:8099/api/tasks/123456
+curl http://localhost:8099/api/record
 ```
+
 
 ### PUT
 
@@ -103,7 +122,9 @@ The PUT request is used to update task information.
 **Path URL:** `/api/tasks/:taskID`  
 **Test:**
 ```bash
-curl -X PUT -H "Content-Type: application/json" --data '{"dueDate": "2023-12-10", "description": "Complete with additional notes."}' http://localhost:8099/api/tasks/123456
+curl -X PUT http://localhost:8099/api/record \
+  -H "Content-Type: application/json" \
+  -d '{"task": "Updated Task Name", "date": "Updated Task Date"}'
 ```
 
 ### DELETE
@@ -112,32 +133,7 @@ The DELETE request is used to delete a task record.
 **Path URL:** `/api/tasks/:taskID`  
 **Test:**
 ```bash
-curl -X DELETE http://localhost:8099/api/tasks/123456
+curl -X DELETE http://localhost:8099/api/record/TaskNameToDelete
 ```
 
-Please note that for all RESTful CRUD services, proper authentication and authorization should be implemented.
-
-To perform the operations, you can use the following curl commands:
-
-- Create a new task record:
-```bash
-curl -X POST -H "Content-Type: application/json" --data '{"taskName": "Finish assignment", "dueDate": "2023-11-30"}' http://localhost:8099/api/tasks
-```
-
-- Retrieve task information:
-```bash
-curl -X GET http://localhost:8099/api/tasks/123456
-```
-
-- Update task information:
-```bash
-curl -X PUT -H "Content-Type: application/json" --data '{"dueDate": "2023-12-10"}' http://localhost:8099/api/tasks/123456
-```
-
-- Delete a task record:
-```bash
-curl -X DELETE http://localhost:8099/api/tasks/123456
-```
-
----
 
