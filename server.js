@@ -9,6 +9,7 @@ const app = express();
 const mongoose = require('mongoose');
 const { Console } = require('console');
 
+
 const mongourl = 'mongodb+srv://sandy:Funnylol786@cluster0.xebyb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 const dbName = 'myproject';
 const collectionName = 'to-do';
@@ -35,6 +36,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 passport.use(new FacebookStrategy({
   clientID: '863157422347410', 
@@ -198,6 +200,7 @@ app.get('/auth/facebook/callback',
     failureRedirect: '/' })
 );
 
+
 app.get('/', isLoggedIn, (req,res) => {
   res.redirect('/content');
 })
@@ -239,15 +242,17 @@ app.get('/logout', (req, res) => {
 });
 
 
+
+
 /*Restful*/
-app.post('/api/record/:userid', async (req, res) => {
-  if (req.params.userid) {
+app.post('/api/record', async (req, res) => {
+  if (user.id) {
   await client.connect();
   console.log("Connected successfully to server");
   const db = client.db(dbName);
   let newDoc = {
-  userid: req.user.id,
-  task: req.fields.taskname,
+  userid: user.id,
+  task: req.fields.task,
   date: req.fields.date
   };
   await insertDocument(db, newDoc);
@@ -257,14 +262,12 @@ app.post('/api/record/:userid', async (req, res) => {
   }
   })
   
-  app.get('/api/record/:userid', async (req,res) => {
-  if (req.params.userid) {
-  let criteria = {};
-  criteria['userid'] = req.params.userid;
+  app.get('/api/record', async (req,res) => {
+  if (user.id) {
   await client.connect();
   console.log("Connected successfully to server");
   const db = client.db(dbName);
-  const docs = await findUserTasks(db, criteria);  
+  const docs = await findUserTasks(db, user.id); 
   res.status(200).json(docs);
   }
   else {
@@ -272,13 +275,15 @@ app.post('/api/record/:userid', async (req, res) => {
   }
   });
   
-  app.put('/api/record/:userid', async (req,res) => {
-  if(req.params.userid){
+  
+  
+  app.put('/api/record', async (req,res) => {
+  if(user.id){
   console.log(req.body);
   
   await client.connect();
   const db = client.db(dbName);
-  let criteria = {userid: req.params.userid };
+  let criteria = {userid: user.id };
   let updateData = req.fields;
   const results = await updateDocument(db, criteria, updateData);
   
@@ -288,13 +293,13 @@ app.post('/api/record/:userid', async (req, res) => {
   }
   })
   
-  app.delete('/api/record/:userid', async (req,res) => {
-  if(req.params.userid){
-  console.log(req.body)
+  app.delete('/api/record/:task', async (req,res) => {
+  if(req.params.task){
+  console.log(req.params.task)
   
   await client.connect();
   const db = client.db(dbName);
-  const criteria = {userid: req.params.userid };
+  const criteria = {task: req.params.task };
   const results = await deleteDocument(db,criteria);
   
   console.log(results)
@@ -305,6 +310,7 @@ app.post('/api/record/:userid', async (req, res) => {
   })
   
   /*Restful*/
+  
   
   app.get('*', (req, res) => {
     res.status(404).render('info', { message: `${req.path} - Unknown request!` });
