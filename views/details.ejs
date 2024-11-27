@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
     <body style="font-family: Arial, sans-serif; text-align: center;">
         <h1>Hello, <%= user.name %></h1>
@@ -21,4 +21,98 @@
         <a href="/delete?_id=<%= task._id %>" style="text-decoration: none; padding: 5px 10px; background-color: #e74c3c; color: #fff; border-radius: 5px; margin-top: 10px;">Delete Task</a><br>
         <a href="/" style="text-decoration: none; padding: 5px 10px; background-color: #27ae60; color: #fff; border-radius: 5px; margin-top: 10px;">Back to Home</a>
     </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #555;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        a.edit {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        a.delete {
+            background-color: #e74c3c;
+            color: #fff;
+        }
+
+        a.back {
+            background-color: #27ae60;
+            color: #fff;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Hello, <%= user.name %></h1>
+        <hr/>
+        <p>You are logged in via <b><%= user.type %></b>. Your user ID is <%= user.id %></p>
+        <h2>Task Information</h2>
+        <hr>
+        <p><strong>Task Name:</strong> <%= task.task %></p>
+        <p><strong>Due Date:</strong> <%= task.date %></p>
+
+        <% if (task.photo) { %>
+            <img src="data:image/jpg;base64,<%= task.photo %>" alt="Task Image"><br>
+        <% } %>
+
+        <% if (task.userid) { %>
+            <p><small>Created by User ID: <%= task.userid %></small></p>
+        <% } %>
+        <br>
+        <a href="/edit?_id=<%= task._id %>" class="edit">Edit Task</a>
+        <a href="/delete?_id=<%= task._id %>" class="delete">Delete Task</a>
+        <a href="/" class="back">Back to Home</a>
+    </div>
+</body>
+
 </html>
