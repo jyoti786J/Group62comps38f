@@ -1,11 +1,54 @@
 <!DOCTYPE html>
-<html>
-    <body style="font-family: Arial, sans-serif; text-align: center;">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #3498db;
+            margin: 20px auto;
+            width: 50%;
+        }
+
+        b {
+            color: #777;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 5px 10px;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
         <h1>Hello, <%= user.name %></h1>
-        <hr/>
+        <hr>
         <p>You have successfully logged in via <b><%= user.type %></b>.</p>
         <b><%= message %></b>
-        <p><a href="/" style="text-decoration: none; padding: 5px 10px; background-color: #3498db; color: #fff; border-radius: 5px;">Back to Home</a></p>
-        
-    </body>
+        <p><a href="/" style="text-decoration: none;">Back to Home</a></p>
+    </div>
+</body>
+
 </html>
